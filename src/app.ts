@@ -10,7 +10,7 @@ app.use(cors({origin:true}))
 
 
 app.get("/",(_,res:Response)=>{
-res.send("This server is running at port:5000")
+res.send("Server is perfectly running on port:5000.")
 })
 
 
