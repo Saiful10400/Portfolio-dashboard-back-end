@@ -59,16 +59,48 @@ model PersonalInfo {
   updatedAt DateTime @updatedAt
 }
 
-
 model blog {
-  id           String       @id @default(uuid())
-  title        String
-  slug         String    @unique
-  content      String
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  tags         String[]
-  status       String    @default("published")
+  id            String   @id @default(uuid())
+  title         String
+  slug          String   @unique
+  content       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  tags          String[]
+  status        String   @default("published")
   featuredImage String?
-  isDeleted    Boolean   @default(false)
+  isDeleted     Boolean  @default(false)
+}
+
+model project {
+  id                      String   @id @default(uuid())
+  projectName             String // Name of the project
+  description             String // Detailed description of the project
+  projectSummary          String // Short summary or overview of the project
+  technologies            String[] // List of technologies used in the project
+  slug                    String   @unique
+  projectLink             String? // Optional link to the project
+  repoLink                String? // Optional link to the project's repository
+  projectCreationDate     DateTime // Creation date of the project
+  updatedAt               DateTime @updatedAt // Automatically updated timestamp
+  coverImage              String? // Optional image of the project
+  isDeleted               Boolean  @default(false)
+  images                  String[] // Array of image URLs for the project
+  projectCreationDuration String? // Duration of the project creation, e.g., "3 months"
+}
+
+model Experience {
+  id                String    @id @default(uuid()) // Unique identifier
+  companyName       String // Name of the company
+  companyWebsiteUrl String? // Company's official website URL (optional)
+  role              String // Job title or role
+  certificate       String?
+  startDate         DateTime // When the experience started
+  endDate           DateTime? // When the experience ended (nullable for current roles)
+  description       String // Brief description of responsibilities or achievements
+  technologies      String[] // Array of technologies/tools used
+  location          String // Location of the job (e.g., remote, city, country)
+  isCurrent         Boolean   @default(false) // Whether this is the current role
+  createdAt         DateTime  @default(now()) // Record creation timestamp
+  updatedAt         DateTime  @updatedAt // Record update timestamp
 }

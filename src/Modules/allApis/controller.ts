@@ -50,11 +50,37 @@ const createBlog=catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+
+//Project blog.
+const getProject=catchAsync(async (req: Request, res: Response) => {
+  const data = await allApiService.getProject(req);
+ 
+  sendResponse(res, {
+    data,
+    statusCode: httpStatus.OK,
+    message: "project retrieved.",
+    success: true,
+  });
+});
+// update Project.
+const createProject=catchAsync(async (req: Request, res: Response) => {
+  const data = allApiService.createProject(req.body);
+
+  sendResponse(res, {
+    data,
+    statusCode: httpStatus.OK,
+    message: "Project created.",
+    success: true,
+  });
+});
+
 const allController = {
   getPersonalInfo,
   updatePersonalInfo,
   getBlog,
-  createBlog
+  createBlog,
+  createProject,
+  getProject
 };
 
 export default allController;

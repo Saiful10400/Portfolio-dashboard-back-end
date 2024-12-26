@@ -12,6 +12,10 @@ router.post("/personalInfoUpdate",allController.updatePersonalInfo)
 router.get("/blog",allController.getBlog)
 router.post("/createBlog",allController.createBlog)
 
+//project
+router.get("/project",allController.getProject)
+router.post("/createProject",allController.createProject)
+
 
 
 const allRoutes=router

@@ -47,13 +47,39 @@ const createBlogs=async(payload:Prisma.blogCreateInput)=>{
     return result
 }
 
+// getProject.
+const getProject=async(payload:Request)=>{
+    if(payload.query.slug){
+        const result=await prisma.project.findFirst({
+            where:{
+                slug:payload.query.slug as string
+            }
+        })
+        return result
+    }
+    else{
+        const result=await prisma.project.findMany()
+         
+        return result
+    }
+}
+
+// createProject.
+const createProject=async(payload:Prisma.projectCreateInput)=>{
+    const result=await prisma.project.create({
+        data:payload
+    })
+    return result
+}
 
 
 const allApiService={
     getPersonalInfo,
     updatePersonalInfo,
     getBlogs,
-    createBlogs
+    createBlogs,
+    getProject,
+    createProject
 }
 
 export default allApiService
