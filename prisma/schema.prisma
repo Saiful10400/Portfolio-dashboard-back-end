@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(moderator)
+  status    Status   @default(active)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+}
+
+enum Role {
+  admin
+  superAdmin
+  moderator
+}
+
+enum Status {
+  active
+  block
+}
+
+model PersonalInfo {
+  id         Int     @id @unique @default(1)
+  name       String
+  title      String // e.g., "Full-Stack Developer"
+  bio        String? // Optional: A short biography
+  email      String
+  phone      String? // Optional
+  address    String? // Optional
+  profilePic String? // URL to profile picture
+
+  // Social and contact links
+  linkedIn  String? // Optional: LinkedIn profile URL
+  github    String? // Optional: GitHub profile URL
+  twitter   String? // Optional: Twitter handle or profile URL
+  facebook  String? // Optional: Facebook profile URL
+  instagram String? // Optional: Instagram profile URL
+  website   String? // Optional: Personal website or blog URL
+  whatsapp  String? // Optional: WhatsApp number
+  telegram  String? // Optional: Telegram username or link
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model blog {
+  id           String       @id @default(uuid())
+  title        String
+  slug         String    @unique
+  content      String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  tags         String[]
+  status       String    @default("published")
+  featuredImage String?
+  isDeleted    Boolean   @default(false)
+}

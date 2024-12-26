@@ -11,6 +11,6 @@ app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 app.use((0, cors_1.default)({ origin: true }));
 app.get("/", (_, res) => {
-    res.send("This server is running at port:5000");
+    res.send("Server is perfectly running on port:5000.");
 });
 exports.default = app;
